@@ -18,6 +18,7 @@
 		F851AA2718D3C32800D17074 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA0C18D3C32800D17074 /* Foundation.framework */; };
 		F851AA2818D3C32800D17074 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA1018D3C32800D17074 /* UIKit.framework */; };
 		F851AA3C18D3C34000D17074 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA3B18D3C34000D17074 /* MapKit.framework */; };
+		F851AA3F18D3C3F300D17074 /* SLParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = F851AA3E18D3C3F300D17074 /* SLParallaxController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 		F851AA2418D3C32800D17074 /* SLParallaxControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLParallaxControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F851AA2518D3C32800D17074 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F851AA3B18D3C34000D17074 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F851AA3D18D3C3F300D17074 /* SLParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLParallaxController.h; sourceTree = "<group>"; };
+		F851AA3E18D3C3F300D17074 /* SLParallaxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLParallaxController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 			children = (
 				F851AA1B18D3C32800D17074 /* SLAppDelegate.h */,
 				F851AA1C18D3C32800D17074 /* SLAppDelegate.m */,
+				F851AA3D18D3C3F300D17074 /* SLParallaxController.h */,
+				F851AA3E18D3C3F300D17074 /* SLParallaxController.m */,
 				F851AA1E18D3C32800D17074 /* Images.xcassets */,
 				F851AA1318D3C32800D17074 /* Supporting Files */,
 			);
@@ -221,6 +226,7 @@
 			files = (
 				F851AA1918D3C32800D17074 /* main.m in Sources */,
 				F851AA1D18D3C32800D17074 /* SLAppDelegate.m in Sources */,
+				F851AA3F18D3C3F300D17074 /* SLParallaxController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

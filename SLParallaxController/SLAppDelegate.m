@@ -7,6 +7,7 @@
 //
 
 #import "SLAppDelegate.h"
+#import "SLParallaxController.h"
 
 @implementation SLAppDelegate
 
@@ -16,6 +17,15 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        self.window.clipsToBounds =YES;
+        self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
+        self.window.bounds = CGRectMake(0, 20, self.window.frame.size.width, self.window.frame.size.height);
+    }
+
+    self.window.rootViewController = [SLParallaxController new];
+
     return YES;
 }
 
