@@ -9,41 +9,61 @@ Sample usage is available in the `SLAppDelegate`.
 
 ## Requirements
 
-`SLParallaxController` uses ARC and requires iOS 7.0+. Works for iPhone and iPad.
+`SLParallaxController` uses ARC and requires iOS 7.0+. Works for iPhone and iPad.<br />
+Require the framework `MapKit`
 
 ## Installation
 
 ### CocoaPods
 
-`pod 'SLParallaxController'`
+Add the following line to your Podfile:
+
+```ruby
+pod 'SLParallaxController'
+```
+
+Then run the following in the same directory as your Podfile:
+```ruby
+pod install
+```
 
 ### Manual
 
-Copy the files named `SLParallaxController` (_.h / .m_) which are in the folder `SLParallaxController` to your project.
+Copy the folder `SLParallaxController` to your project.
 
-### Usage
+## Usage
 
 `SLParallaxController` is a subclass of `UIViewController` so you just need to instantiate a new one like this : `[SLParallaxController new]`
 
-### Customization / SubClassing
+### Customization
 
-To access to the MapView or TableView and customize them, you need to define those objects in your interface like this :
+You can customize the view by setting up properties below:
 
-	@interface ParallaxSubClass ()
+	- heighTableViewHeader : Height of the visible map on high position
 
-	@property (nonatomic, strong) UITableView 	*tableView;
-	@property (nonatomic, strong) MKMapView 	*mapView;
+	- Y_tableViewOnBottom : position of the TableView when it's down
 	
-	@end
+	- minYOffsetToReach	: The minimum Y (TableView's contentOffset) 
+						  to allow the 'displaying' of the map.
+						  
 
-And then you need to tell to the compiler that the getter and setter are defined by a superclass :
-	
-	@implementation ParallaxSubClass
+###Handling User Interaction
 
-	@dynamic 	tableView;
-	@dynamic	mapView;
-	
-After that you will be able to customize them and adapt their behaviors.
+
+These methods, defined in the `SLParallaxControllerDelegate` protocol, are called on the delegate when the user tap on the map or the tableView.
+
+```` objective-c
+-(void)didTapOnMapView;
+-(void)didTapOnTableView;
+````
+
+These methods are called on the delegate when the tableView moved DOWN and UP.
+
+```` objective-c
+-(void)didTableViewMoveDown;
+-(void)didTableViewMoveUp;
+````
+
 
 
 ##License
