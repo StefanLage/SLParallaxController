@@ -25,7 +25,7 @@
     }
 
     self.window.rootViewController = [SLParallaxController new];
-
+    
     return YES;
 }
 

@@ -10,15 +10,15 @@
 		F851AA0D18D3C32800D17074 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA0C18D3C32800D17074 /* Foundation.framework */; };
 		F851AA0F18D3C32800D17074 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA0E18D3C32800D17074 /* CoreGraphics.framework */; };
 		F851AA1118D3C32800D17074 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA1018D3C32800D17074 /* UIKit.framework */; };
-		F851AA1718D3C32800D17074 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F851AA1518D3C32800D17074 /* InfoPlist.strings */; };
-		F851AA1918D3C32800D17074 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F851AA1818D3C32800D17074 /* main.m */; };
-		F851AA1D18D3C32800D17074 /* SLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F851AA1C18D3C32800D17074 /* SLAppDelegate.m */; };
-		F851AA1F18D3C32800D17074 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F851AA1E18D3C32800D17074 /* Images.xcassets */; };
 		F851AA2618D3C32800D17074 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA2518D3C32800D17074 /* XCTest.framework */; };
 		F851AA2718D3C32800D17074 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA0C18D3C32800D17074 /* Foundation.framework */; };
 		F851AA2818D3C32800D17074 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA1018D3C32800D17074 /* UIKit.framework */; };
 		F851AA3C18D3C34000D17074 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F851AA3B18D3C34000D17074 /* MapKit.framework */; };
-		F851AA3F18D3C3F300D17074 /* SLParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = F851AA3E18D3C3F300D17074 /* SLParallaxController.m */; };
+		F8AC43CA18D4B8200041B1E1 /* SLParallaxController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AC43C818D4B8200041B1E1 /* SLParallaxController.m */; };
+		F8AC43E118D4B8880041B1E1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AC43E018D4B8880041B1E1 /* Images.xcassets */; };
+		F8AC43E618D4B8AA0041B1E1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AC43E318D4B8AA0041B1E1 /* main.m */; };
+		F8AC43EA18D4B8D60041B1E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F8AC43E818D4B8D60041B1E1 /* InfoPlist.strings */; };
+		F8AC43F318D4B9100041B1E1 /* SLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AC43F218D4B9100041B1E1 /* SLAppDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,18 +36,18 @@
 		F851AA0C18D3C32800D17074 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F851AA0E18D3C32800D17074 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F851AA1018D3C32800D17074 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		F851AA1418D3C32800D17074 /* SLParallaxController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SLParallaxController-Info.plist"; sourceTree = "<group>"; };
-		F851AA1618D3C32800D17074 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F851AA1818D3C32800D17074 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F851AA1A18D3C32800D17074 /* SLParallaxController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SLParallaxController-Prefix.pch"; sourceTree = "<group>"; };
-		F851AA1B18D3C32800D17074 /* SLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLAppDelegate.h; sourceTree = "<group>"; };
-		F851AA1C18D3C32800D17074 /* SLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLAppDelegate.m; sourceTree = "<group>"; };
-		F851AA1E18D3C32800D17074 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F851AA2418D3C32800D17074 /* SLParallaxControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLParallaxControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F851AA2518D3C32800D17074 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F851AA3B18D3C34000D17074 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		F851AA3D18D3C3F300D17074 /* SLParallaxController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLParallaxController.h; sourceTree = "<group>"; };
-		F851AA3E18D3C3F300D17074 /* SLParallaxController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLParallaxController.m; sourceTree = "<group>"; };
+		F8AC43C718D4B8200041B1E1 /* SLParallaxController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SLParallaxController.h; path = ../SLParallaxController/SLParallaxController.h; sourceTree = "<group>"; };
+		F8AC43C818D4B8200041B1E1 /* SLParallaxController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SLParallaxController.m; path = ../SLParallaxController/SLParallaxController.m; sourceTree = "<group>"; };
+		F8AC43E018D4B8880041B1E1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F8AC43E318D4B8AA0041B1E1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F8AC43E418D4B8AA0041B1E1 /* SLParallaxController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SLParallaxController-Info.plist"; sourceTree = "<group>"; };
+		F8AC43E518D4B8AA0041B1E1 /* SLParallaxController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SLParallaxController-Prefix.pch"; sourceTree = "<group>"; };
+		F8AC43E918D4B8D60041B1E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F8AC43F118D4B9100041B1E1 /* SLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLAppDelegate.h; sourceTree = "<group>"; };
+		F8AC43F218D4B9100041B1E1 /* SLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLAppDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +78,8 @@
 		F851AA0018D3C32700D17074 = {
 			isa = PBXGroup;
 			children = (
-				F851AA1218D3C32800D17074 /* SLParallaxController */,
+				F8AC43F918D4BB3D0041B1E1 /* SLParallaxController */,
+				F8AC43DC18D4B86C0041B1E1 /* Demo */,
 				F851AA0B18D3C32800D17074 /* Frameworks */,
 				F851AA0A18D3C32800D17074 /* Products */,
 			);
@@ -105,28 +106,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F851AA1218D3C32800D17074 /* SLParallaxController */ = {
+		F8AC43DC18D4B86C0041B1E1 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				F851AA1B18D3C32800D17074 /* SLAppDelegate.h */,
-				F851AA1C18D3C32800D17074 /* SLAppDelegate.m */,
-				F851AA3D18D3C3F300D17074 /* SLParallaxController.h */,
-				F851AA3E18D3C3F300D17074 /* SLParallaxController.m */,
-				F851AA1E18D3C32800D17074 /* Images.xcassets */,
-				F851AA1318D3C32800D17074 /* Supporting Files */,
+				F8AC43F118D4B9100041B1E1 /* SLAppDelegate.h */,
+				F8AC43F218D4B9100041B1E1 /* SLAppDelegate.m */,
+				F8AC43E018D4B8880041B1E1 /* Images.xcassets */,
+				F8AC43E218D4B8930041B1E1 /* Supporting Files */,
 			);
-			path = SLParallaxController;
+			name = Demo;
 			sourceTree = "<group>";
 		};
-		F851AA1318D3C32800D17074 /* Supporting Files */ = {
+		F8AC43E218D4B8930041B1E1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F851AA1418D3C32800D17074 /* SLParallaxController-Info.plist */,
-				F851AA1518D3C32800D17074 /* InfoPlist.strings */,
-				F851AA1818D3C32800D17074 /* main.m */,
-				F851AA1A18D3C32800D17074 /* SLParallaxController-Prefix.pch */,
+				F8AC43E818D4B8D60041B1E1 /* InfoPlist.strings */,
+				F8AC43E318D4B8AA0041B1E1 /* main.m */,
+				F8AC43E418D4B8AA0041B1E1 /* SLParallaxController-Info.plist */,
+				F8AC43E518D4B8AA0041B1E1 /* SLParallaxController-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F8AC43F918D4BB3D0041B1E1 /* SLParallaxController */ = {
+			isa = PBXGroup;
+			children = (
+				F8AC43C718D4B8200041B1E1 /* SLParallaxController.h */,
+				F8AC43C818D4B8200041B1E1 /* SLParallaxController.m */,
+			);
+			name = SLParallaxController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,8 +213,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F851AA1718D3C32800D17074 /* InfoPlist.strings in Resources */,
-				F851AA1F18D3C32800D17074 /* Images.xcassets in Resources */,
+				F8AC43EA18D4B8D60041B1E1 /* InfoPlist.strings in Resources */,
+				F8AC43E118D4B8880041B1E1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,9 +232,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F851AA1918D3C32800D17074 /* main.m in Sources */,
-				F851AA1D18D3C32800D17074 /* SLAppDelegate.m in Sources */,
-				F851AA3F18D3C3F300D17074 /* SLParallaxController.m in Sources */,
+				F8AC43F318D4B9100041B1E1 /* SLAppDelegate.m in Sources */,
+				F8AC43CA18D4B8200041B1E1 /* SLParallaxController.m in Sources */,
+				F8AC43E618D4B8AA0041B1E1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,10 +256,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F851AA1518D3C32800D17074 /* InfoPlist.strings */ = {
+		F8AC43E818D4B8D60041B1E1 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F851AA1618D3C32800D17074 /* en */,
+				F8AC43E918D4B8D60041B1E1 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -335,8 +343,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SLParallaxController/SLParallaxController-Prefix.pch";
-				INFOPLIST_FILE = "SLParallaxController/SLParallaxController-Info.plist";
+				GCC_PREFIX_HEADER = "SLParallaxController-Prefix.pch";
+				INFOPLIST_FILE = "SLParallaxController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -349,8 +357,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SLParallaxController/SLParallaxController-Prefix.pch";
-				INFOPLIST_FILE = "SLParallaxController/SLParallaxController-Info.plist";
+				GCC_PREFIX_HEADER = "SLParallaxController-Prefix.pch";
+				INFOPLIST_FILE = "SLParallaxController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -416,6 +424,7 @@
 				F851AA3718D3C32800D17074 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F851AA3818D3C32800D17074 /* Build configuration list for PBXNativeTarget "SLParallaxControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +433,7 @@
 				F851AA3A18D3C32800D17074 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
