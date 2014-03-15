@@ -122,13 +122,25 @@
 #pragma mark - Internal Methods
 
 - (void)handleTapMapView:(UIGestureRecognizer *)gesture {
-    if(!self.isShutterOpen)
+    if(!self.isShutterOpen){
+        // Move the tableView down to let the map appear entirely
         [self openShutter];
+        // Inform the delegate
+        if([self.delegate respondsToSelector:@selector(didTapOnMapView)]){
+            [self.delegate didTapOnMapView];
+        }
+    }
 }
 
 - (void)handleTapTableView:(UIGestureRecognizer *)gesture {
-    if(self.isShutterOpen)
+    if(self.isShutterOpen){
+        // Move the tableView up to reach is origin position
         [self closeShutter];
+        // Inform the delegate
+        if([self.delegate respondsToSelector:@selector(didTapOnTableView)]){
+            [self.delegate didTapOnTableView];
+        }
+    }
 }
 
 // Move DOWN the tableView to show the "entire" mapView
@@ -146,6 +158,11 @@
                          [self.tableView setScrollEnabled:NO];
                          // Center the user 's location
                          [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserDown];
+
+                         // Inform the delegate
+                         if([self.delegate respondsToSelector:@selector(didTableViewMoveDown)]){
+                             [self.delegate didTableViewMoveDown];
+                         }
                      }];
 }
 
@@ -165,6 +182,11 @@
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
                          // Center the user 's location
                          [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserUp];
+
+                         // Inform the delegate
+                         if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
+                             [self.delegate didTableViewMoveUp];
+                         }
                      }];
 }
 
