@@ -24,10 +24,8 @@
 #define CLOSE_SHUTTER_LATITUDE_MINUS         .018
 
 
-@interface SLParallaxController ()  <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
+@interface SLParallaxController ()
 
-@property (nonatomic, strong)   UITableView             *tableView;
-@property (nonatomic, strong)   MKMapView               *mapView;
 @property (strong, nonatomic)   UIView                  *header;
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapMapViewGesture;
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapTableViewGesture;
@@ -169,27 +167,53 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
+    static NSString *identifier;
     if(indexPath.row == 0){
+        identifier = @"firstCell";
         // Add some shadow to the first cell
-        cell = [tableView dequeueReusableCellWithIdentifier:IDENTIFIER_FIRST_CELL];
-        if(!cell)
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDENTIFIER_FIRST_CELL];
-        
-        CGRect shadowFrame      = cell.layer.bounds;
-        CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
-        cell.layer.shadowPath   = shadowPath;
-        [cell.layer setShadowOffset:CGSizeMake(-2, -2)];
-        [cell.layer setShadowColor:[[UIColor grayColor] CGColor]];
-        [cell.layer setShadowOpacity:.75];
-        
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if(!cell){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:identifier];
+
+            CGRect shadowFrame      = cell.layer.bounds;
+            CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+            cell.layer.shadowPath   = shadowPath;
+            [cell.layer setShadowOffset:CGSizeMake(-2, -2)];
+            [cell.layer setShadowColor:[[UIColor grayColor] CGColor]];
+            [cell.layer setShadowOpacity:.75];
+        }
     }
     else{
-        cell = [tableView dequeueReusableCellWithIdentifier:IDENTIFIER_OTHER_CELL];
+        identifier = @"otherCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if(!cell)
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IDENTIFIER_OTHER_CELL];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:identifier];
     }
-    [[cell textLabel] setText:HELLO_WORLD];
+    [[cell textLabel] setText:@"Hello World !"];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //first get total rows in that section by current indexPath.
+    NSInteger totalRow = [tableView numberOfRowsInSection:indexPath.section];
+
+    //this is the last row in section.
+    if(indexPath.row == totalRow -1){
+        // get total of cells's Height
+        float cellsHeight = totalRow * cell.frame.size.height;
+        // calculate tableView's Height with it's the header
+        float tableHeight = (tableView.frame.size.height - tableView.tableHeaderView.frame.size.height);
+
+        // Check if we need to create a foot to hide the backView (the map)
+        if((cellsHeight - tableView.frame.origin.y)  < tableHeight){
+            // Add a footer to hide the background
+            int footerHeight = tableHeight - cellsHeight;
+            tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, footerHeight)];
+            [tableView.tableFooterView setBackgroundColor:[UIColor whiteColor]];
+        }
+    }
 }
 
 #pragma mark - MapView Delegate
@@ -199,12 +223,13 @@
     if (!userLocation)
         return;
     MKCoordinateRegion region;
-    CLLocationCoordinate2D loc = userLocation.location.coordinate;
-    loc.latitude  = loc.latitude - minLatitude;
-    region.center = loc;
-    region.span = MKCoordinateSpanMake(.05, .05); //Zoom distance
-    region = [self.mapView regionThatFits:region];
-    [self.mapView setRegion:region animated:YES];
+    CLLocationCoordinate2D loc  = userLocation.location.coordinate;
+    loc.latitude                = loc.latitude - minLatitude;
+    region.center               = loc;
+    region.span                 = MKCoordinateSpanMake(.05, .05);       //Zoom distance
+    region                      = [self.mapView regionThatFits:region];
+    [self.mapView setRegion:region
+                   animated:YES];
     
 }
 

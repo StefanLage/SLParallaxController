@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface SLParallaxController : UIViewController
+@interface SLParallaxController : UIViewController <UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate>
+
+@property (nonatomic, strong)   UITableView                         *tableView;
+@property (nonatomic, strong)   MKMapView                           *mapView;
+
 
 @end
