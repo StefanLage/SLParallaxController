@@ -7,17 +7,13 @@
 //
 
 #import "SLParallaxController.h"
-#import <MapKit/MapKit.h>
 
-
-#define HEIGHT_STATUS_BAR                    [[UIScreen mainScreen] bounds].size.height - 20
-#define Y_DOWN_TABLEVIEW                     HEIGHT_STATUS_BAR - 40
-#define IDENTIFIER_FIRST_CELL                @"firstCell"
-#define IDENTIFIER_OTHER_CELL                @"otherCell"
-#define HELLO_WORLD                          @"Hello World !"
+#define SCREEN_HEIGHT_WITHOUT_STATUS_BAR     [[UIScreen mainScreen] bounds].size.height - 20
+#define HEIGHT_STATUS_BAR                    20
+#define Y_DOWN_TABLEVIEW                     SCREEN_HEIGHT_WITHOUT_STATUS_BAR - 40
 #define DEFAULT_HEIGHT_HEADER                100.0f
 #define MIN_HEIGHT_HEADER                    10.0f
-#define DEFAULT_Y_OFFSET                     -250.0f
+#define DEFAULT_Y_OFFSET                     ([[UIScreen mainScreen] bounds].size.height == 480.0f) ? -200.0f : -250.0f
 #define FULL_Y_OFFSET                        20.0f
 #define MIN_Y_OFFSET_TO_REACH                -30
 #define OPEN_SHUTTER_LATITUDE_MINUS          .005
@@ -26,7 +22,6 @@
 
 @interface SLParallaxController ()
 
-@property (strong, nonatomic)   UIView                  *header;
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapMapViewGesture;
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapTableViewGesture;
 @property (nonatomic)           CGRect                  headerFrame;
@@ -39,11 +34,31 @@
 
 @implementation SLParallaxController
 
+@synthesize tableView               = _tableView;
+@synthesize mapView                 = _mapView;
+@synthesize heighTableViewHeader    = _heighTableViewHeader;
+@synthesize minHeighTableViewHeader = _minHeighTableViewHeader;
+@synthesize heighTableView          = _heighTableView;
+@synthesize default_Y_mapView       = _default_Y_mapView;
+@synthesize default_Y_tableView     = _default_Y_tableView;
+@synthesize Y_tableViewOnBottom     = _Y_tableViewOnBottom;
+@synthesize latitudeUserUp          = _latitudeUserUp;
+@synthesize latitudeUserDown        = _latitudeUserDown;
+@synthesize minYOffsetToReach       = _minYOffsetToReach;
+
+
 -(id)init{
     self =  [super init];
     if(self){
-        [self setupTableView];
-        [self setupMapView];
+        [self setup];
+    }
+    return self;
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        [self setup];
     }
     return self;
 }
@@ -51,6 +66,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupTableView];
+    [self setupMapView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,9 +75,22 @@
     [super didReceiveMemoryWarning];
 }
 
+// Set all view we will need
+-(void)setup{
+    _heighTableViewHeader       = DEFAULT_HEIGHT_HEADER;
+    _heighTableView             = SCREEN_HEIGHT_WITHOUT_STATUS_BAR;
+    _minHeighTableViewHeader    = MIN_HEIGHT_HEADER;
+    _default_Y_tableView        = HEIGHT_STATUS_BAR;
+    _Y_tableViewOnBottom        = Y_DOWN_TABLEVIEW;
+    _minYOffsetToReach          = MIN_Y_OFFSET_TO_REACH;
+    _latitudeUserUp             = CLOSE_SHUTTER_LATITUDE_MINUS;
+    _latitudeUserDown           = OPEN_SHUTTER_LATITUDE_MINUS;
+    _default_Y_mapView          = DEFAULT_Y_OFFSET;
+}
+
 -(void)setupTableView{
-    _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 20, 320, HEIGHT_STATUS_BAR)];
-    _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, DEFAULT_HEIGHT_HEADER)];
+    _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 20, 320, _heighTableView)];
+    _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, _heighTableViewHeader)];
     [_tableView setBackgroundColor:[UIColor clearColor]];
     
     // Add gesture to gestures
@@ -78,7 +108,7 @@
 }
 
 -(void)setupMapView{
-    _mapView                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, DEFAULT_Y_OFFSET, 320, HEIGHT_STATUS_BAR)];
+    _mapView                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.default_Y_mapView, 320, _heighTableView)];
     [_mapView setShowsUserLocation:YES];
     _mapView.delegate = self;
     [self.view insertSubview:_mapView
@@ -108,14 +138,14 @@
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.mapView.frame                 = CGRectMake(0, FULL_Y_OFFSET, self.mapView.frame.size.width, self.mapView.frame.size.height);
-                         self.tableView.tableHeaderView     = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, MIN_HEIGHT_HEADER)];
-                         self.tableView.frame               = CGRectMake(0, Y_DOWN_TABLEVIEW, self.tableView.frame.size.width, self.tableView.frame.size.height);
+                         self.tableView.tableHeaderView     = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, self.minHeighTableViewHeader)];
+                         self.tableView.frame               = CGRectMake(0, self.Y_tableViewOnBottom, self.tableView.frame.size.width, self.tableView.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          self.isShutterOpen = YES;
                          [self.tableView setScrollEnabled:NO];
                          // Center the user 's location
-                         [self zoomToUserLocation:self.mapView.userLocation minLatitude:OPEN_SHUTTER_LATITUDE_MINUS];
+                         [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserDown];
                      }];
 }
 
@@ -125,16 +155,16 @@
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.mapView.frame             = CGRectMake(0, DEFAULT_Y_OFFSET, self.mapView.frame.size.width, self.mapView.frame.size.height);
-                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _headerYOffSet, self.view.frame.size.width, DEFAULT_HEIGHT_HEADER)];
-                         self.tableView.frame           = CGRectMake(0, 20, self.tableView.frame.size.width, self.tableView.frame.size.height);
+                         self.mapView.frame             = CGRectMake(0, self.default_Y_mapView, self.mapView.frame.size.width, self.mapView.frame.size.height);
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _headerYOffSet, self.view.frame.size.width, self.heighTableViewHeader)];
+                         self.tableView.frame           = CGRectMake(0, self.default_Y_tableView, self.tableView.frame.size.width, self.tableView.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          self.isShutterOpen = NO;
                          [self.tableView setScrollEnabled:YES];
                          [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
                          // Center the user 's location
-                         [self zoomToUserLocation:self.mapView.userLocation minLatitude:CLOSE_SHUTTER_LATITUDE_MINUS];
+                         [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserUp];
                      }];
 }
 
@@ -142,7 +172,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // check if the Y offset is under the minus Y to reach
-    if (self.tableView.contentOffset.y < MIN_Y_OFFSET_TO_REACH){
+    if (self.tableView.contentOffset.y < self.minYOffsetToReach){
         if(!self.displayMap)
             self.displayMap                      = YES;
     }else{
@@ -235,9 +265,10 @@
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     if(_isShutterOpen)
-        [self zoomToUserLocation:self.mapView.userLocation minLatitude:OPEN_SHUTTER_LATITUDE_MINUS];
+        [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserDown];
     else
-        [self zoomToUserLocation:self.mapView.userLocation minLatitude:CLOSE_SHUTTER_LATITUDE_MINUS];
+        [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserUp];
 }
+
 
 @end
