@@ -35,19 +35,6 @@
 
 @implementation SLParallaxController
 
-@synthesize tableView               = _tableView;
-@synthesize mapView                 = _mapView;
-@synthesize heighTableViewHeader    = _heighTableViewHeader;
-@synthesize minHeighTableViewHeader = _minHeighTableViewHeader;
-@synthesize heighTableView          = _heighTableView;
-@synthesize default_Y_mapView       = _default_Y_mapView;
-@synthesize default_Y_tableView     = _default_Y_tableView;
-@synthesize Y_tableViewOnBottom     = _Y_tableViewOnBottom;
-@synthesize latitudeUserUp          = _latitudeUserUp;
-@synthesize latitudeUserDown        = _latitudeUserDown;
-@synthesize minYOffsetToReach       = _minYOffsetToReach;
-
-
 -(id)init{
     self =  [super init];
     if(self){
@@ -92,30 +79,30 @@
 }
 
 -(void)setupTableView{
-    _tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 20, 320, _heighTableView)];
-    _tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, _heighTableViewHeader)];
-    [_tableView setBackgroundColor:[UIColor clearColor]];
+    self.tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 20, 320, self.heighTableView)];
+    self.tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, self.heighTableViewHeader)];
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
     
     // Add gesture to gestures
-    _tapMapViewGesture      = [[UITapGestureRecognizer alloc] initWithTarget:self
+    self.tapMapViewGesture      = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                       action:@selector(handleTapMapView:)];
-    _tapTableViewGesture    = [[UITapGestureRecognizer alloc] initWithTarget:self
+    self.tapTableViewGesture    = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                       action:@selector(handleTapTableView:)];
-    [_tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
-    [_tableView addGestureRecognizer:_tapTableViewGesture];
+    [self.tableView.tableHeaderView addGestureRecognizer:self.tapMapViewGesture];
+    [self.tableView addGestureRecognizer:self.tapTableViewGesture];
     
     // Init selt as default tableview's delegate & datasource
-    _tableView.dataSource   = self;
-    _tableView.delegate     = self;
-    [self.view addSubview:_tableView];
+    self.tableView.dataSource   = self;
+    self.tableView.delegate     = self;
+    [self.view addSubview:self.tableView];
 }
 
 -(void)setupMapView{
-    _mapView                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.default_Y_mapView, 320, _heighTableView)];
-    [_mapView setShowsUserLocation:YES];
-    _mapView.delegate = self;
-    [self.view insertSubview:_mapView
-                belowSubview: _tableView];
+    self.mapView                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.default_Y_mapView, 320, self.heighTableView)];
+    [self.mapView setShowsUserLocation:YES];
+    self.mapView.delegate = self;
+    [self.view insertSubview:self.mapView
+                belowSubview: self.tableView];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -175,14 +162,14 @@
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.mapView.frame             = CGRectMake(0, self.default_Y_mapView, self.mapView.frame.size.width, _heighTableView);
-                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _headerYOffSet, self.view.frame.size.width, self.heighTableViewHeader)];
+                         self.mapView.frame             = CGRectMake(0, self.default_Y_mapView, self.mapView.frame.size.width, self.heighTableView);
+                         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.headerYOffSet, self.view.frame.size.width, self.heighTableViewHeader)];
                          self.tableView.frame           = CGRectMake(0, self.default_Y_tableView, self.tableView.frame.size.width, self.tableView.frame.size.height);
                      }
                      completion:^(BOOL finished){
                          self.isShutterOpen = NO;
                          [self.tableView setScrollEnabled:YES];
-                         [self.tableView.tableHeaderView addGestureRecognizer:_tapMapViewGesture];
+                         [self.tableView.tableHeaderView addGestureRecognizer:self.tapMapViewGesture];
                          // Center the user 's location
                          [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserUp];
 
@@ -201,10 +188,10 @@
 
     if (scrollOffset < 0) {
         // Adjust map
-        headerMapViewFrame.origin.y = _headerYOffSet - ((scrollOffset / 2));
+        headerMapViewFrame.origin.y = self.headerYOffSet - ((scrollOffset / 2));
     } else {
         // Scrolling Up -> normal behavior
-        headerMapViewFrame.origin.y = _headerYOffSet - scrollOffset;
+        headerMapViewFrame.origin.y = self.headerYOffSet - scrollOffset;
     }
     self.mapView.frame = headerMapViewFrame;
 
