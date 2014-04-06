@@ -14,7 +14,7 @@
 #define DEFAULT_HEIGHT_HEADER                100.0f
 #define MIN_HEIGHT_HEADER                    10.0f
 #define DEFAULT_Y_OFFSET                     ([[UIScreen mainScreen] bounds].size.height == 480.0f) ? -200.0f : -250.0f
-#define FULL_Y_OFFSET                        20.0f
+#define FULL_Y_OFFSET                        -200.0f
 #define MIN_Y_OFFSET_TO_REACH                -30
 #define OPEN_SHUTTER_LATITUDE_MINUS          .005
 #define CLOSE_SHUTTER_LATITUDE_MINUS         .018
@@ -28,6 +28,7 @@
 @property (nonatomic)           float                   headerYOffSet;
 @property (nonatomic)           BOOL                    isShutterOpen;
 @property (nonatomic)           BOOL                    displayMap;
+@property (nonatomic)           float                   heightMap;
 
 @end
 
@@ -86,6 +87,8 @@
     _latitudeUserUp             = CLOSE_SHUTTER_LATITUDE_MINUS;
     _latitudeUserDown           = OPEN_SHUTTER_LATITUDE_MINUS;
     _default_Y_mapView          = DEFAULT_Y_OFFSET;
+    _headerYOffSet              = DEFAULT_Y_OFFSET;
+    _heightMap                  = 1000.0f;
 }
 
 -(void)setupTableView{
@@ -149,8 +152,8 @@
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.mapView.frame                 = CGRectMake(0, FULL_Y_OFFSET, self.mapView.frame.size.width, self.mapView.frame.size.height);
                          self.tableView.tableHeaderView     = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, self.minHeighTableViewHeader)];
+                         self.mapView.frame                 = CGRectMake(0, FULL_Y_OFFSET, self.mapView.frame.size.width, self.heightMap);
                          self.tableView.frame               = CGRectMake(0, self.Y_tableViewOnBottom, self.tableView.frame.size.width, self.tableView.frame.size.height);
                      }
                      completion:^(BOOL finished){
@@ -172,7 +175,7 @@
                           delay:0.1
                         options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.mapView.frame             = CGRectMake(0, self.default_Y_mapView, self.mapView.frame.size.width, self.mapView.frame.size.height);
+                         self.mapView.frame             = CGRectMake(0, self.default_Y_mapView, self.mapView.frame.size.width, _heighTableView);
                          self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0, _headerYOffSet, self.view.frame.size.width, self.heighTableViewHeader)];
                          self.tableView.frame           = CGRectMake(0, self.default_Y_tableView, self.tableView.frame.size.width, self.tableView.frame.size.height);
                      }
@@ -193,6 +196,18 @@
 #pragma mark - Table view Delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat scrollOffset        = scrollView.contentOffset.y;
+    CGRect headerMapViewFrame   = self.mapView.frame;
+
+    if (scrollOffset < 0) {
+        // Adjust map
+        headerMapViewFrame.origin.y = _headerYOffSet - ((scrollOffset / 2));
+    } else {
+        // Scrolling Up -> normal behavior
+        headerMapViewFrame.origin.y = _headerYOffSet - scrollOffset;
+    }
+    self.mapView.frame = headerMapViewFrame;
+
     // check if the Y offset is under the minus Y to reach
     if (self.tableView.contentOffset.y < self.minYOffsetToReach){
         if(!self.displayMap)
@@ -201,7 +216,6 @@
         if(self.displayMap)
             self.displayMap                      = NO;
     }
-
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -213,7 +227,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 50;
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
