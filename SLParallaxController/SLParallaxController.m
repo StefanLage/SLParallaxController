@@ -20,7 +20,7 @@
 #define CLOSE_SHUTTER_LATITUDE_MINUS         .018
 
 
-@interface SLParallaxController ()
+@interface SLParallaxController ()<UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapMapViewGesture;
 @property (strong, nonatomic)   UITapGestureRecognizer  *tapTableViewGesture;
@@ -88,6 +88,7 @@
                                                                       action:@selector(handleTapMapView:)];
     self.tapTableViewGesture    = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                       action:@selector(handleTapTableView:)];
+    self.tapTableViewGesture.delegate = self;
     [self.tableView.tableHeaderView addGestureRecognizer:self.tapMapViewGesture];
     [self.tableView addGestureRecognizer:self.tapTableViewGesture];
     
@@ -283,7 +284,6 @@
     region                      = [self.mapView regionThatFits:region];
     [self.mapView setRegion:region
                    animated:YES];
-    
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
@@ -293,5 +293,11 @@
         [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserUp];
 }
 
-
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (gestureRecognizer == self.tapTableViewGesture) {
+        return _isShutterOpen;
+    }
+    return YES;
+}
 @end
