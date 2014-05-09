@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         		= 'SLParallaxController'
-  s.version      		= '1.0.1'
+  s.version      		= '1.0.3'
   s.summary      		= 'Create a parallax effect between an UITableView and a MapView, like the view in FourSquare.'
-  s.homepage	 		= 'https://github.com/stefanlage/SLParallaxController'
+  s.homepage	 		= 'https://github.com/StefanLage/SLParallaxController'
   s.license      		= 'MIT'
   s.author 	 		= { 'StefanLage' => 'lagestfan@gmail.com' }
-  s.source 	 		= { :git => 'https://github.com/stefanlage/SLParallaxController.git', :tag => '1.0.1' }
+  s.source 	 		= { :git => 'https://github.com/StefanLage/SLParallaxController.git', :tag => '1.0.3' }
   s.source_files 		= 'SLParallaxController/*.{h,m}'
   s.requires_arc 		= true
   s.platform	 		= :ios, '7.0'
