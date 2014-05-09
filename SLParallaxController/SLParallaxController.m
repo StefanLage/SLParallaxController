@@ -147,6 +147,8 @@
                          self.tableView.frame               = CGRectMake(0, self.Y_tableViewOnBottom, self.tableView.frame.size.width, self.tableView.frame.size.height);
                      }
                      completion:^(BOOL finished){
+                         // Disable cells selection
+                         [self.tableView setAllowsSelection:NO];
                          self.isShutterOpen = YES;
                          [self.tableView setScrollEnabled:NO];
                          // Center the user 's location
@@ -172,6 +174,8 @@
                          self.tableView.frame           = CGRectMake(0, self.default_Y_tableView, self.tableView.frame.size.width, self.tableView.frame.size.height);
                      }
                      completion:^(BOOL finished){
+                         // Enable cells selection
+                         [self.tableView setAllowsSelection:YES];
                          self.isShutterOpen = NO;
                          [self.tableView setScrollEnabled:YES];
                          [self.tableView.tableHeaderView addGestureRecognizer:self.tapMapViewGesture];
