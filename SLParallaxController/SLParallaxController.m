@@ -76,6 +76,8 @@
     _default_Y_mapView          = DEFAULT_Y_OFFSET;
     _headerYOffSet              = DEFAULT_Y_OFFSET;
     _heightMap                  = 1000.0f;
+    _regionAnimated             = YES;
+    _userLocationUpdateAnimated = YES;
 }
 
 -(void)setupTableView{
@@ -148,7 +150,9 @@
                          self.isShutterOpen = YES;
                          [self.tableView setScrollEnabled:NO];
                          // Center the user 's location
-                         [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserDown];
+                         [self zoomToUserLocation:self.mapView.userLocation
+                                      minLatitude:self.latitudeUserDown
+                                         animated:self.regionAnimated];
 
                          // Inform the delegate
                          if([self.delegate respondsToSelector:@selector(didTableViewMoveDown)]){
@@ -172,7 +176,9 @@
                          [self.tableView setScrollEnabled:YES];
                          [self.tableView.tableHeaderView addGestureRecognizer:self.tapMapViewGesture];
                          // Center the user 's location
-                         [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserUp];
+                         [self zoomToUserLocation:self.mapView.userLocation
+                                      minLatitude:self.latitudeUserUp
+                                         animated:self.regionAnimated];
 
                          // Inform the delegate
                          if([self.delegate respondsToSelector:@selector(didTableViewMoveUp)]){
@@ -272,7 +278,7 @@
 
 #pragma mark - MapView Delegate
 
-- (void)zoomToUserLocation:(MKUserLocation *)userLocation minLatitude:(float)minLatitude
+- (void)zoomToUserLocation:(MKUserLocation *)userLocation minLatitude:(float)minLatitude animated:(BOOL)anim
 {
     if (!userLocation)
         return;
@@ -283,14 +289,18 @@
     region.span                 = MKCoordinateSpanMake(.05, .05);       //Zoom distance
     region                      = [self.mapView regionThatFits:region];
     [self.mapView setRegion:region
-                   animated:YES];
+                   animated:anim];
 }
 
 -(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
     if(_isShutterOpen)
-        [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserDown];
+        [self zoomToUserLocation:self.mapView.userLocation
+                     minLatitude:self.latitudeUserDown
+                        animated:self.userLocationUpdateAnimated];
     else
-        [self zoomToUserLocation:self.mapView.userLocation minLatitude:self.latitudeUserUp];
+        [self zoomToUserLocation:self.mapView.userLocation
+                     minLatitude:self.latitudeUserUp
+                        animated:self.userLocationUpdateAnimated];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
