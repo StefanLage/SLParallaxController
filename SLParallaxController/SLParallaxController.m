@@ -241,7 +241,8 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:identifier];
 
-            CGRect shadowFrame      = cell.layer.bounds;
+            CGRect cellBounds       = cell.layer.bounds;
+            CGRect shadowFrame      = CGRectMake(cellBounds.origin.x, cellBounds.origin.y, tableView.frame.size.width, 10.0);
             CGPathRef shadowPath    = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
             cell.layer.shadowPath   = shadowPath;
             [cell.layer setShadowOffset:CGSizeMake(-2, -2)];
