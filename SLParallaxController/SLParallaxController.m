@@ -9,6 +9,7 @@
 #import "SLParallaxController.h"
 
 #define SCREEN_HEIGHT_WITHOUT_STATUS_BAR     [[UIScreen mainScreen] bounds].size.height - 20
+#define SCREEN_WIDTH                         [[UIScreen mainScreen] bounds].size.width
 #define HEIGHT_STATUS_BAR                    20
 #define Y_DOWN_TABLEVIEW                     SCREEN_HEIGHT_WITHOUT_STATUS_BAR - 40
 #define DEFAULT_HEIGHT_HEADER                100.0f
@@ -81,7 +82,7 @@
 }
 
 -(void)setupTableView{
-    self.tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 20, 320, self.heighTableView)];
+    self.tableView                  = [[UITableView alloc]  initWithFrame: CGRectMake(0, 20, SCREEN_WIDTH, self.heighTableView)];
     self.tableView.tableHeaderView  = [[UIView alloc]       initWithFrame: CGRectMake(0.0, 0.0, self.view.frame.size.width, self.heighTableViewHeader)];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     
@@ -101,7 +102,7 @@
 }
 
 -(void)setupMapView{
-    self.mapView                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.default_Y_mapView, 320, self.heighTableView)];
+    self.mapView                        = [[MKMapView alloc] initWithFrame:CGRectMake(0, self.default_Y_mapView, SCREEN_WIDTH, self.heighTableView)];
     [self.mapView setShowsUserLocation:YES];
     self.mapView.delegate = self;
     [self.view insertSubview:self.mapView
@@ -274,7 +275,7 @@
         if((cellsHeight - tableView.frame.origin.y)  < tableHeight){
             // Add a footer to hide the background
             int footerHeight = tableHeight - cellsHeight;
-            tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, footerHeight)];
+            tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, footerHeight)];
             [tableView.tableFooterView setBackgroundColor:[UIColor whiteColor]];
         }
     }
